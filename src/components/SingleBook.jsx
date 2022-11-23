@@ -16,13 +16,11 @@ class SingleBook extends Component {
 
   render() {
     return (
-      <Card className="my-card" onClick={() => this.handleSelected()}>
-        <Card.Img
-          className={
-            this.state.selected ? "my-card-img selected-shadow" : "my-card-img"
-          }
-          src={this.props.book.img}
-        />
+      <Card
+        className={this.state.selected ? "my-card selected-shadow" : "my-card"}
+        onClick={() => this.handleSelected()}
+      >
+        <Card.Img className={"my-card-img"} src={this.props.book.img} />
         <Card.Body>
           <Card.Title>{this.props.book.title}</Card.Title>
         </Card.Body>
