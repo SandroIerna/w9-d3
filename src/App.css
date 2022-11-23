@@ -45,3 +45,7 @@
 .my-card-img {
   height: 300px;
 }
+
+.selected-shadow {
+  box-shadow: -1px 7px 15px 11px #ff5981;
+}
