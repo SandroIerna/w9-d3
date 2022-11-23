@@ -1,5 +1,4 @@
 import { Component } from "react";
-import history from "../data/history.json";
 import SingleBook from "./SingleBook";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -22,7 +21,7 @@ class BookList extends Component {
           onKeyUp={(e) => this.filterBookList(e.target.value)}
         ></input>
         <Row>
-          {history
+          {this.props.booksArray
             .filter((book) => book.title.includes(this.state.filter))
             .map((book) => {
               return (
