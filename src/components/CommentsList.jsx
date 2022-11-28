@@ -14,14 +14,14 @@ class CommentsList extends Component {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzdmNmJhOGQ4MzkzNTAwMTVlOGM0YWUiLCJpYXQiOjE2NjkyOTUwMTYsImV4cCI6MTY3MDUwNDYxNn0.Z15UvL3hG6GWARjXrB98XKSUvgAXuGD0KAtYLns3EKA",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzg0YmQ4YmQ4MDNjMjAwMTVlY2VkZDgiLCJpYXQiOjE2Njk2NDM2NjAsImV4cCI6MTY3MDg1MzI2MH0.OucnUsqfTAnlNm9rYFOwRCUQDJf0bnELnjpMIxJLA_w",
           },
         }
       );
       if (response.ok) {
         let data = await response.json();
         let filteredArray = data.filter((comment) =>
-          comment.author.includes("sandro")
+          comment.author.includes("opossum")
         );
         this.setState({
           comments: filteredArray,
@@ -54,6 +54,13 @@ class CommentsList extends Component {
       alert(error);
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.elementId !== this.props.elementId) {
+      console.log("Id changed");
+      this.fetchComments();
+    }
+  }
 
   componentDidMount() {
     this.fetchComments();

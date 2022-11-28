@@ -19,7 +19,7 @@ class AddComment extends Component {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzdmNmJhOGQ4MzkzNTAwMTVlOGM0YWUiLCJpYXQiOjE2NjkyOTUwMTYsImV4cCI6MTY3MDUwNDYxNn0.Z15UvL3hG6GWARjXrB98XKSUvgAXuGD0KAtYLns3EKA",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzg0YmQ4YmQ4MDNjMjAwMTVlY2VkZDgiLCJpYXQiOjE2Njk2NDM2NjAsImV4cCI6MTY3MDg1MzI2MH0.OucnUsqfTAnlNm9rYFOwRCUQDJf0bnELnjpMIxJLA_w",
           },
         }
       );
@@ -45,8 +45,9 @@ class AddComment extends Component {
     });
   };
 
-  componentDidMount() {
-    this.setState({ elementId: this.props.elementId });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.elementId !== this.props.elementId)
+      this.setState({ elementId: this.props.elementId });
   }
 
   render() {
