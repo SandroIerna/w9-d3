@@ -1,7 +1,7 @@
-import { Component, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-const AddComment = () => {
+const AddComment = ({ elementId }) => {
   const [comment, setComment] = useState("");
 
   const onSubmitHandler = async (e) => {
@@ -35,7 +35,10 @@ const AddComment = () => {
   };
 
   const onChangeHandler = (value, fieldToSet) => {
-    setComment({ ...comment, [fieldToSet]: value });
+    setComment({
+      ...comment,
+      [fieldToSet]: value,
+    });
 
     // this.setState({
     //   ...this.state,
@@ -48,9 +51,9 @@ const AddComment = () => {
   //     this.setState({ elementId: this.props.elementId });
   // }
   useEffect(() => {
-    setComment({ ...comment, [comment.elementId]: comment.elementId });
+    setComment({ elementId: elementId });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [comment.elementId]);
+  }, [elementId]);
 
   return (
     <div>
