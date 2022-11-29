@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
 const AddComment = ({ elementId }) => {
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState({
+    comment: "",
+    rate: "1",
+    elementId: "",
+  });
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -51,7 +55,7 @@ const AddComment = ({ elementId }) => {
   //     this.setState({ elementId: this.props.elementId });
   // }
   useEffect(() => {
-    setComment({ elementId: elementId });
+    setComment({ ...comment, elementId: elementId });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementId]);
 
