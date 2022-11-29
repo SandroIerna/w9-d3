@@ -1,16 +1,12 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
 
-class CommentsList extends Component {
-  state = {
-    comments: [],
-  };
-
-  fetchComments = async () => {
+const CommentsList = ({ elementId }) => {
+  const [comments, setComments] = useState([]);
+  const fetchComments = async () => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.elementId,
+        "https://striveschool-api.herokuapp.com/api/comments/" + elementId,
         {
           headers: {
             Authorization:
@@ -23,16 +19,14 @@ class CommentsList extends Component {
         let filteredArray = data.filter((comment) =>
           comment.author.includes("opossum")
         );
-        this.setState({
-          comments: filteredArray,
-        });
+        setComments(filteredArray);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  deleteComment = async (commentId) => {
+  const deleteComment = async (commentId) => {
     console.log(
       "https://striveschool-api.herokuapp.com/api/comments/" + commentId
     );
@@ -55,34 +49,41 @@ class CommentsList extends Component {
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.elementId !== this.props.elementId) {
-      console.log("Id changed");
-      this.fetchComments();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.elementId !== elementId) {
+  //     console.log("Id changed");
+  //     this.fetchComments();
+  //   }
+  // }
 
-  componentDidMount() {
-    this.fetchComments();
-    console.log(this.props.elementId);
-  }
+  useEffect(() => {
+    console.log("Id changed");
+    fetchComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [elementId]);
 
-  render() {
-    return (
-      <>
-        <h4>Previous Comments</h4>
-        <ListGroup className="mt-4">
-          {this.state.comments.map((r) => (
-            <ListGroup.Item
-              key={r._id}
-              onClick={() => this.deleteComment(r._id)}
-            >
-              {r.rate} out of 10 - {r.comment}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </>
-    );
-  }
-}
+  // componentDidMount() {
+  //   this.fetchComments();
+  //   console.log(this.props.elementId);
+  // }
+  useEffect(() => {
+    fetchComments();
+    console.log(elementId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <h4>Previous Comments</h4>
+      <ListGroup className="mt-4">
+        {comments.map((r) => (
+          <ListGroup.Item key={r._id} onClick={() => deleteComment(r._id)}>
+            {r.rate} out of 10 - {r.comment}
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </>
+  );
+};
+
 export default CommentsList;

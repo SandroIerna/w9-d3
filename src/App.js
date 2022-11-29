@@ -6,43 +6,39 @@ import BookList from "./components/BookList";
 import history from "./data/history.json";
 import { Col, Row } from "react-bootstrap";
 import CommentArea from "./components/CommentArea";
-import { Component } from "react";
+import { useState } from "react";
 
-class App extends Component {
-  state = {
-    selectedBookAsin: "",
-    selected: false,
-  };
+const App = () => {
+  const [selectedBookAsin, setSelectedBookAsin] = useState("");
+  const [selected, setSelected] = useState(false);
 
-  handleStateChange = (handleAsin) => {
-    this.setState({ selectedBookAsin: handleAsin });
-    if (this.state.selected === false) {
-      this.setState({ selected: true });
+  const handleStateChange = (handleAsin) => {
+    setSelectedBookAsin(handleAsin);
+    if (selected === false) {
+      setSelected(true);
     } else {
-      this.setState({ selected: false });
+      setSelected(false);
     }
   };
 
-  render() {
-    return (
-      <div>
-        <WarningSign alertText="Danger!" />
-        <MyBadge badgeText="This is a badge" badgeColor="secondary" />
-        <Row>
-          <Col xs={8}>
-            <BookList
-              booksArray={history}
-              handleStateChange={this.handleStateChange}
-              selected={this.state.selected}
-            />
-          </Col>
-          <Col xs={4}>
-            <CommentArea elementId={this.state.selectedBookAsin} />
-          </Col>
-        </Row>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <WarningSign alertText="Danger!" />
+      <MyBadge badgeText="This is a badge" badgeColor="secondary" />
+      <Row>
+        <Col xs={8}>
+          <BookList
+            booksArray={history}
+            handleStateChange={handleStateChange}
+            selected={selected}
+          />
+        </Col>
+        <Col xs={4}>
+          <CommentArea elementId={selectedBookAsin} />
+        </Col>
+      </Row>
+    </div>
+  );
+};
 
 export default App;
