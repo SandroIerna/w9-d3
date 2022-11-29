@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 
 class CommentsList extends Component {
   state = {

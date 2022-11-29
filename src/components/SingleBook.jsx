@@ -6,29 +6,24 @@ class SingleBook extends Component {
   };
 
   handleSelected = () => {
-    alert("clicked");
-    // if (this.state.selected === false) {
-    //   this.setState({ selected: true });
-    // } else {
-    //   this.setState({ selected: false });
-    // }
+    if (this.state.selected === false) {
+      this.setState({ selected: true });
+    } else {
+      this.setState({ selected: false });
+    }
   };
 
   render() {
     return (
       <>
         <Card
-          // className={
-          //   this.state.selected ? "my-card selected-shadow" : "my-card"
-          // }
-          onClick={() => this.props.handleStateChange(this.props.book.asin)}
+          className={this.state.selected ? "selected-shadow my-card" : ""}
+          onClick={() => {
+            this.props.handleStateChange(this.props.book.asin);
+            this.handleSelected();
+          }}
         >
-          <Card.Img
-            className={
-              this.selected ? "my-card-img selected-shadow" : "my-card-img"
-            }
-            src={this.props.book.img}
-          />
+          <Card.Img className={"my-card-img"} src={this.props.book.img} />
           <Card.Body>
             <Card.Title>{this.props.book.title}</Card.Title>
           </Card.Body>

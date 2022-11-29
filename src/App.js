@@ -15,7 +15,6 @@ class App extends Component {
   };
 
   handleStateChange = (handleAsin) => {
-    console.log("Clicked", handleAsin);
     this.setState({ selectedBookAsin: handleAsin });
     if (this.state.selected === false) {
       this.setState({ selected: true });
@@ -30,14 +29,14 @@ class App extends Component {
         <WarningSign alertText="Danger!" />
         <MyBadge badgeText="This is a badge" badgeColor="secondary" />
         <Row>
-          <Col xs={6}>
+          <Col xs={8}>
             <BookList
               booksArray={history}
               handleStateChange={this.handleStateChange}
               selected={this.state.selected}
             />
           </Col>
-          <Col xs={6}>
+          <Col xs={4}>
             <CommentArea elementId={this.state.selectedBookAsin} />
           </Col>
         </Row>
